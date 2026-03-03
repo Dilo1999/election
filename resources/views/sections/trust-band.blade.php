@@ -9,6 +9,7 @@
         'name' => 'Partner',
         'logo' => asset('images/brand/' . $file),
     ], $brandLogos);
+    // Duplicate multiple times so the strip can scroll and every logo appears
     $duplicatedBrands = array_merge($brands, $brands, $brands);
 @endphp
 <section class="py-10 md:py-16 overflow-hidden bg-white">
@@ -20,7 +21,7 @@
         <div class="trust-band-marquee flex items-center gap-6 md:gap-10 whitespace-nowrap">
             @foreach($duplicatedBrands as $brand)
                 <div class="group flex-shrink-0 w-[160px] md:w-[240px] aspect-square flex items-center justify-center bg-[#f7f4eb]/40 border border-[#6d5a2c]/5 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:bg-white p-6 md:p-8">
-                    <img src="{{ $brand['logo'] }}" alt="{{ $brand['name'] }}" class="max-w-full max-h-full object-contain contrast-125 transition-transform duration-500 group-hover:scale-110 scale-[1.35]" loading="lazy">
+                    <img src="{{ $brand['logo'] }}" alt="{{ $brand['name'] }}" class="max-w-full max-h-full object-contain contrast-125 transition-transform duration-500 group-hover:scale-110 scale-[1.35]">
                 </div>
             @endforeach
         </div>
@@ -30,11 +31,17 @@
 <style>
     @keyframes trust-band-marquee {
         0% { transform: translateX(0); }
-        100% { transform: translateX(-33.333%); }
+        100% { transform: translateX(-100%); }
     }
 
     .trust-band-marquee {
-        animation: trust-band-marquee 10s linear infinite;
+        animation: trust-band-marquee 40s linear infinite;
         will-change: transform;
+    }
+
+    @media (max-width: 768px) {
+        .trust-band-marquee {
+            animation-duration: 25s;
+        }
     }
 </style>
