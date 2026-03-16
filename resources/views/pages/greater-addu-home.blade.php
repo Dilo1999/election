@@ -12,6 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $isDv ? 'ބޮޑު އައްޑޫ' : 'The Greater Addu' }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon/fav.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { margin: 0; }
