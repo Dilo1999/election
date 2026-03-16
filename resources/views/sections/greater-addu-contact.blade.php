@@ -2,6 +2,7 @@
     /** @var bool $isDv */
     /** @var string $fontHeading */
     /** @var string $fontBody */
+    $contact = \App\Models\GreaterAdduContact::current();
 @endphp
 
 <section class="w-full py-24 relative overflow-hidden" style="background-color:#045b52">
@@ -43,29 +44,31 @@
             {{-- Contact info + socials --}}
             <div class="flex flex-col gap-5 w-full max-w-xl">
                 @php
-                    $contactItems = [
-                        [
-                            'icon'      => 'mail',
-                            'label_en'  => 'Email Us',
-                            'label_dv'  => 'އީމެއިލް ކުރައްވާ',
-                            'value_en'  => 'hello@thegreateraddu.mv',
-                            'value_dv'  => 'hello@thegreateraddu.mv',
-                        ],
-                        [
-                            'icon'      => 'phone',
-                            'label_en'  => 'Call Us',
-                            'label_dv'  => 'ގުޅުއްވާ',
-                            'value_en'  => '+960 689 0000',
-                            'value_dv'  => '+960 689 0000',
-                        ],
-                        [
-                            'icon'      => 'map',
-                            'label_en'  => 'Find Us',
-                            'label_dv'  => 'ތަން',
-                            'value_en'  => 'Hithadhoo, Addu City, Maldives',
-                            'value_dv'  => 'ހިތަދޫ، އައްޑޫ ސިޓީ، ދިވެހިރާއްޖެ',
-                        ],
-                    ];
+                    $contactItems = $contact
+                        ? [
+                            [
+                                'icon'      => 'mail',
+                                'label_en'  => 'Email Us',
+                                'label_dv'  => 'އީމެއިލް ކުރައްވާ',
+                                'value_en'  => $contact->email_en,
+                                'value_dv'  => $contact->email_dv ?? $contact->email_en,
+                            ],
+                            [
+                                'icon'      => 'phone',
+                                'label_en'  => 'Call Us',
+                                'label_dv'  => 'ގުޅުއްވާ',
+                                'value_en'  => $contact->phone_en,
+                                'value_dv'  => $contact->phone_dv ?? $contact->phone_en,
+                            ],
+                            [
+                                'icon'      => 'map',
+                                'label_en'  => 'Find Us',
+                                'label_dv'  => 'ތަން',
+                                'value_en'  => $contact->address_en,
+                                'value_dv'  => $contact->address_dv,
+                            ],
+                        ]
+                        : [];
                 @endphp
 
                 @foreach ($contactItems as $item)
@@ -116,15 +119,26 @@
                     >
                         {{ $isDv ? 'ސޯޝަލް މީޑިއާ' : 'Follow Us' }}
                     </p>
+                    @php
+                        $socialLinks = [
+                            ['label' => 'F', 'url' => $contact?->facebook_url],
+                            ['label' => 'X', 'url' => $contact?->x_url],
+                            ['label' => 'IG', 'url' => $contact?->instagram_url],
+                        ];
+                    @endphp
                     <div class="flex gap-3">
-                        @foreach (['F','X','IG'] as $label)
-                            <a
-                                href="#"
-                                class="w-10 h-10 rounded-xl flex items-center justify-center text-xs transition-all duration-200"
-                                style="background-color:rgba(33,181,163,0.2);color:#21b5a3;font-family:{{ $fontBody }}"
-                            >
-                                {{ $label }}
-                            </a>
+                        @foreach ($socialLinks as $social)
+                            @if ($social['url'])
+                                <a
+                                    href="{{ $social['url'] }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="w-10 h-10 rounded-xl flex items-center justify-center text-xs transition-all duration-200"
+                                    style="background-color:rgba(33,181,163,0.2);color:#21b5a3;font-family:{{ $fontBody }}"
+                                >
+                                    {{ $social['label'] }}
+                                </a>
+                            @endif
                         @endforeach
                     </div>
                 </div>

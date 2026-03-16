@@ -74,17 +74,6 @@
                         </span>
                     @endforeach
                 </nav>
-
-                <div class="flex items-center gap-3">
-                    @foreach (['F','T','I'] as $initial)
-                        <span
-                            class="w-8 h-8 rounded-lg flex items-center justify-center text-xs"
-                            style="background-color:rgba(255,255,255,0.07);color:rgba(255,255,255,0.45)"
-                        >
-                            {{ $initial }}
-                        </span>
-                    @endforeach
-                </div>
             </div>
 
             <div class="mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2" style="border-top:1px solid rgba(255,255,255,0.07)">
