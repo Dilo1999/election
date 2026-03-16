@@ -38,10 +38,10 @@
             </div>
         </div>
 
-        {{-- Two-column layout --}}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {{-- Left: contact info + socials --}}
-            <div class="flex flex-col gap-5">
+        {{-- Contact layout --}}
+        <div class="flex justify-center">
+            {{-- Contact info + socials --}}
+            <div class="flex flex-col gap-5 w-full max-w-xl">
                 @php
                     $contactItems = [
                         [
@@ -128,68 +128,6 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
-
-            {{-- Right: contact form --}}
-            <div
-                class="rounded-2xl p-8"
-                style="background-color:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12)"
-            >
-                <form class="flex flex-col gap-5">
-                    <div class="flex flex-col gap-2">
-                        <label
-                            class="text-xs uppercase tracking-widest"
-                            style="color:rgba(255,255,255,0.45);font-family:{{ $fontBody }}"
-                        >
-                            {{ $isDv ? 'ނަން' : 'Your Name' }}
-                        </label>
-                        <input
-                            type="text"
-                            class="w-full rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:ring-2"
-                            placeholder="{{ $isDv ? 'ފުރިހަމަ ނަން' : 'Full name' }}"
-                            style="background-color:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);font-family:{{ $fontBody }}"
-                        >
-                    </div>
-
-                    <div class="flex flex-col gap-2">
-                        <label
-                            class="text-xs uppercase tracking-widest"
-                            style="color:rgba(255,255,255,0.45);font-family:{{ $fontBody }}"
-                        >
-                            {{ $isDv ? 'އީމެއިލް' : 'Email Address' }}
-                        </label>
-                        <input
-                            type="email"
-                            class="w-full rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none"
-                            placeholder="you@example.com"
-                            style="background-color:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);font-family:{{ $fontBody }}"
-                        >
-                    </div>
-
-                    <div class="flex flex-col gap-2">
-                        <label
-                            class="text-xs uppercase tracking-widest"
-                            style="color:rgba(255,255,255,0.45);font-family:{{ $fontBody }}"
-                        >
-                            {{ $isDv ? 'މެސެޖް' : 'Message' }}
-                        </label>
-                        <textarea
-                            rows="5"
-                            class="w-full rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none resize-none"
-                            placeholder="{{ $isDv ? 'ލިޔުއްވާ...' : 'Write your message here...' }}"
-                            style="background-color:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);font-family:{{ $fontBody }}"
-                        ></textarea>
-                    </div>
-
-                    <button
-                        type="button"
-                        class="w-full flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm text-white"
-                        style="background:linear-gradient(135deg,#21b5a3,#045b52);box-shadow:0 4px 20px rgba(33,181,163,0.3);font-family:{{ $fontBody }}"
-                    >
-                        ✈
-                        {{ $isDv ? 'ފޮނުއްވާ' : 'Send Message' }}
-                    </button>
-                </form>
             </div>
         </div>
     </div>

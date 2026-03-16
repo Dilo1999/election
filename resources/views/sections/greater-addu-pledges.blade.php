@@ -3,56 +3,10 @@
     /** @var string $fontHeading */
     /** @var string $fontBody */
 
-    $pledges = [
-        [
-            'id' => 1,
-            'icon' => 'book',
-            'title_en' => 'Preserve Identity, Build Knowledge',
-            'title_dv' => 'ތަރިކަ ދަމަހައްޓައި، ދިރާސާ ކުރިއެރުވުން',
-            'text_en' => "Preserve Addu's identity while building a center for research and knowledge.",
-            'text_dv' => 'އައްޑޫގެ ތަރިކަ ދެމެހެއްޓުމާ އެކު، ދިރާސާ ސެންޓަރެއް ބިނާ ކުރުން.',
-        ],
-        [
-            'id' => 2,
-            'icon' => 'compass',
-            'title_en' => 'A City Worth Exploring',
-            'title_dv' => 'ހޯދާ ބެލެވޭ ސިޓީއެއް',
-            'text_en' => 'Make Addu a city visitors explore, not just stay in.',
-            'text_dv' => 'ހަމައެކަނި ތިބޭ ތަނަކަށް ނޫން، ހޯދާ ބެލެވޭ ތަނަކަށް ހެދުން.',
-        ],
-        [
-            'id' => 3,
-            'icon' => 'briefcase',
-            'title_en' => 'Professional Tourism Careers',
-            'title_dv' => 'ޓޫރިޒަމް ދާއިރާ ތަރައްޤީ ކުރުން',
-            'text_en' => 'Bring professional tourism jobs to Addu.',
-            'text_dv' => 'ޕްރޮފެޝަނަލް ޓޫރިޒަމް ވަޒީފާތައް އައްޑޫ ސިޓީ އަށް ގެނައުން.',
-        ],
-        [
-            'id' => 4,
-            'icon' => 'users',
-            'title_en' => 'Reverse Brain Drain',
-            'title_dv' => 'ތަޢުލީމީ ފަރާތްތައް ހިދުކޮށްލުން',
-            'text_en' => 'Reconnect with Addu people and reverse brain drain.',
-            'text_dv' => 'ބޭރަށް ދިޔަ ތަޢުލީމީ ދަރިން ގެ ރައްދުކޮށް، ވިސްނުންތެރިންނާ ގުޅި ހިދުކޮށްލުން.',
-        ],
-        [
-            'id' => 5,
-            'icon' => 'bulb',
-            'title_en' => 'Open City, Open Minds',
-            'title_dv' => 'ހުޅުވާލެވިފައިވާ ސިޓީ',
-            'text_en' => 'Open the city to ideas, investors, and youth.',
-            'text_dv' => 'ޚިޔާލުތަކާއި، ކެހިތެރި ފަރާތްތަކާއި، ޒުވާނުންނަށް ސިޓީ ހުޅުވައިދިނުން.',
-        ],
-        [
-            'id' => 6,
-            'icon' => 'plane',
-            'title_en' => 'Indian Ocean Corridor',
-            'title_dv' => 'އިންޑިއަން އޯޝަން ކޮރިޑޯ',
-            'text_en' => 'Prepare Addu for a future role in an Indian Ocean air and trade corridor.',
-            'text_dv' => 'ވައިގެ ދަތުރާ ވިޔަފާރީ ދާއިރާގައި ދުނިޔޭގެ ސަމާލުކަން ހޯދޭ ސިޓީ އަކަށް ތައްޔާރުުކުރުން.',
-        ],
-    ];
+    $pledges = \App\Models\GreaterAdduPledge::query()
+        ->orderBy('position')
+        ->orderBy('id')
+        ->get();
 @endphp
 
 <section class="w-full py-24 relative overflow-hidden" style="background-color:#045b52">
@@ -94,11 +48,21 @@
                     style="background-color:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(4px)"
                 >
                     <div class="flex items-center justify-between">
+                        @php
+                            $iconKey = $pledge->icon ?: match ($index + 1) {
+                                2 => 'compass',
+                                3 => 'briefcase',
+                                4 => 'users',
+                                5 => 'bulb',
+                                6 => 'plane',
+                                default => 'book',
+                            };
+                        @endphp
                         <div
                             class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
                             style="background-color:rgba(33,181,163,0.2);color:#21b5a3"
                         >
-                            @switch($pledge['icon'])
+                            @switch($iconKey)
                                 @case('compass')
                                     <span class="text-lg">🧭</span>
                                     @break

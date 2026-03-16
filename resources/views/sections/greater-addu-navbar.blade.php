@@ -12,12 +12,11 @@
             <div class="flex-1"></div>
 
             <div class="flex-1 flex justify-center">
-                <span
-                    class="text-xl font-semibold tracking-wide"
-                    style="color:#045b52;font-family:{{ $fontHeading }}"
+                <img
+                    src="{{ asset('images/logo/AdduLogo.png') }}"
+                    alt="{{ $isDv ? 'ދަ ގްރޭޓާ އައްޑޫ' : 'The Greater Addu' }}"
+                    class="h-10 w-auto"
                 >
-                    {{ $isDv ? 'ދަ ގްރޭޓާ އައްޑޫ' : 'The Greater Addu' }}
-                </span>
             </div>
 
             <div class="flex-1 flex justify-end">

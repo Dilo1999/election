@@ -7,7 +7,7 @@
 @endphp
 
 <!DOCTYPE html>
-<html lang="{{ $language === 'dv' ? 'dv' : 'en' }}" dir="{{ $isDv ? 'rtl' : 'ltr' }}">
+<html lang="{{ $language === 'dv' ? 'dv' : 'en' }}" >
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
