@@ -2,8 +2,8 @@
     /** @var string $language */
     /** @var array<array<string,mixed>> $people */
     $isDv        = $language === 'dv';
-    $fontHeading = $isDv ? "'MV Roanu', sans-serif" : "'Playfair Display', serif";
-    $fontBody    = $isDv ? "'MV Roanu', sans-serif" : "'Poppins', sans-serif";
+    $fontHeading = $isDv ? "'MvJadheedhTrace', sans-serif" : "'Playfair Display', serif";
+    $fontBody    = $isDv ? "'MvJadheedhTrace', sans-serif" : "'Poppins', sans-serif";
 @endphp
 
 <!DOCTYPE html>
@@ -15,7 +15,18 @@
     <link rel="icon" type="image/png" href="{{ asset('images/favicon/fav.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @font-face {
+            font-family: 'MvJadheedhTrace';
+            src: url('{{ asset('images/font/Faruma.ttf') }}') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body { margin: 0; }
+
+        .font-mv-jadheedh-trace {
+            font-family: 'MvJadheedhTrace', sans-serif;
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen bg-white {{ $isDv ? 'text-right' : 'text-left' }}">
