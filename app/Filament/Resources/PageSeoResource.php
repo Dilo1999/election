@@ -168,4 +168,9 @@ class PageSeoResource extends Resource
             'edit' => Pages\EditPageSeo::route('/{record}/edit'),
         ];
     }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
 }
