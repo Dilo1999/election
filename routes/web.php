@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\BlogPost;
 use App\Models\GreaterAdduPerson;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -46,5 +47,15 @@ Route::get('/people/{slug}', function (string $slug) {
 
     return view('pages.greater-addu-person', compact('language', 'person'));
 })->name('people.show');
+
+// Individual blog post page
+Route::get('/blogs/{slug}', function (string $slug) {
+    $language = request('lang', 'en') === 'dv' ? 'dv' : 'en';
+    $blog = BlogPost::published()->where('slug', $slug)->first();
+
+    abort_unless($blog, 404);
+
+    return view('pages.greater-addu-blog', compact('language', 'blog'));
+})->name('blogs.show');
 
 // Filament admin panel routes remain registered via Filament's service provider

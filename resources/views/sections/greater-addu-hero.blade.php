@@ -2,26 +2,42 @@
     /** @var bool $isDv */
     /** @var string $fontHeading */
     /** @var string $fontBody */
+    $heroModel = \App\Models\GreaterAdduHero::current();
 
-    $hero = $isDv ? [
-        'header'    => 'ބޮޑު އައްޑޫ',
-        'sub'       => 'ރުވުއްސަތަގެ މުރުކުދަ ޢާއިން މާޒަންރަ ގެ ޑޫ',
-        'hashtag'   => '#TheGreaterAddu',
-        'intro'     => 'އައްޑޫ އަކީ ކޮންމެވެސް އާދައިގެ ތަނެއް ނޫން.',
-        'history'   => 'ފުރަތަމަ އާބާދީއާއި، ކަނޑުދަތުރުފަތުރުގެ ރަހުމަތްތެރިކަމާއި، RAF ޒަމާނާއި، ސުވާދީބު ދައުރާ ހަމައަށް، އައްޑޫއަކީ ތާރީޚެއް، ސިފައެއް، އަދި އިތުބާރެއް ގެންގުޅޭ ތަނެކެވެ.',
-        'challenge' => 'އެކަމަކު މިއަދު އައްޑޫއަށް ބަލާއިރު، ކުޑަ ސިޓީއަކަށް، ކުޑަ ޕްލޭންތަކަކަށް ބަލާލެވެއެވެ. ދުވަހުން ދުވަހަށް އިދާރީ މަސައްކަތަށް އިސްކަން ދެވެއެވެ. އެހެންނަމަވެސް މުހިންމު ސުވާލަކަށް ވީހާވެސް ރަނގަޅަށް ބަލާފައެއް ނުވެއެވެ:',
-        'question'  => 'އައްޑޫ ވާންވީ ކޮން ސިފައެއްގައި؟',
-        'vision'    => 'ބޮޑު އައްޑޫގެ ވިޝަނުން އައްޑޫއަށް ބަލާއިރު، އާދައިގެ ވެރިކަން ހިންގުމަށްވުރެ ބޮޑަށް ފެންނަން ހުންނާނެއެވެ. ޓޫރިޒަމް، ޢިލްމު، މަސައްކަތް، ވެރިކަން ހިންގުމުގެ އިންނޮވޭޝަން އަދި ސަރަހައްދީ ގުޅުން ބަދަހިކުރުމުގައި އައްޑޫއަށް ކުޅެވޭނެ ބޮޑު ދައުރެއް ފެނިގެންދާނެއެވެ.',
-    ] : [
-        'header'    => 'The Greater Addu',
-        'sub'       => "A Vision for Addu's Era of Pride",
-        'hashtag'   => '#THEGREATERADDU',
-        'intro'     => 'Addu has never been an ordinary place.',
-        'history'   => "From ancient settlements and seafaring traditions to the RAF era and the Suvadive period, Addu has always carried a history, character, and confidence that set it apart.",
-        'challenge' => 'Yet today, Addu is often treated as a small city with small plans. Daily administration takes priority, while the bigger question is rarely asked:',
-        'question'  => 'What should Addu become?',
-        'vision'    => 'The Greater Addu looks beyond routine governance and sees Addu for what it truly can be — a city with a larger role in tourism, knowledge, employment, governance innovation, and regional connectivity.',
-    ];
+    if (! $heroModel) {
+        $hero = [
+            'hashtag' => '',
+            'header' => '',
+            'sub' => '',
+            'intro' => '',
+            'history' => '',
+            'challenge' => '',
+            'question' => '',
+            'vision' => '',
+        ];
+    } elseif ($isDv) {
+        $hero = [
+            'hashtag'   => $heroModel->hashtag_dv ?? '',
+            'header'    => $heroModel->header_dv ?? '',
+            'sub'       => $heroModel->sub_dv ?? '',
+            'intro'     => $heroModel->intro_dv ?? '',
+            'history'   => $heroModel->history_dv ?? '',
+            'challenge' => $heroModel->challenge_dv ?? '',
+            'question'  => $heroModel->question_dv ?? '',
+            'vision'    => $heroModel->vision_dv ?? '',
+        ];
+    } else {
+        $hero = [
+            'hashtag'   => $heroModel->hashtag_en ?? '',
+            'header'    => $heroModel->header_en ?? '',
+            'sub'       => $heroModel->sub_en ?? '',
+            'intro'     => $heroModel->intro_en ?? '',
+            'history'   => $heroModel->history_en ?? '',
+            'challenge' => $heroModel->challenge_en ?? '',
+            'question'  => $heroModel->question_en ?? '',
+            'vision'    => $heroModel->vision_en ?? '',
+        ];
+    }
 @endphp
 
 <section

@@ -7,7 +7,7 @@
 @endphp
 
 <!DOCTYPE html>
-<html lang="{{ $language === 'dv' ? 'dv' : 'en' }}">
+<html lang="{{ $language === 'dv' ? 'dv' : 'en' }}" dir="{{ $isDv ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
         body { margin: 0; }
     </style>
 </head>
-<body class="antialiased min-h-screen bg-white">
+<body class="antialiased min-h-screen bg-white {{ $isDv ? 'text-right' : 'text-left' }}">
     {{-- Navbar --}}
     @include('sections.greater-addu-navbar')
 

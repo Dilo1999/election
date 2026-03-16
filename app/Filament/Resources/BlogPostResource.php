@@ -42,24 +42,13 @@ class BlogPostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Post details')
+                Forms\Components\Section::make('Post details (English)')
                     ->schema([
                         TextInput::make('title')
+                            ->label('Title (English)')
                             ->required()
                             ->maxLength(255)
                             ->columnSpanFull(),
-                        TextInput::make('slug')
-                            ->maxLength(255)
-                            ->helperText('Leave empty to auto-generate from title.')
-                            ->columnSpanFull(),
-                        Select::make('category')
-                            ->options([
-                                'STRATEGY' => 'Strategy',
-                                'SOURCING' => 'Sourcing',
-                                'LOGISTICS' => 'Logistics',
-                                'INSIGHTS' => 'Insights',
-                            ])
-                            ->nullable(),
                         TextInput::make('author')
                             ->maxLength(255)
                             ->nullable(),
@@ -67,6 +56,7 @@ class BlogPostResource extends Resource
                             ->nullable()
                             ->helperText('Set to show on the public blog; leave empty for draft.'),
                         TextInput::make('read_time')
+                            ->label('Read time (English)')
                             ->maxLength(255)
                             ->placeholder('e.g. 5 min read')
                             ->nullable(),
@@ -80,13 +70,41 @@ class BlogPostResource extends Resource
                             ->nullable()
                             ->columnSpanFull(),
                         Textarea::make('intro')
+                            ->label('Intro (English)')
                             ->rows(3)
                             ->nullable()
                             ->columnSpanFull(),
                         Textarea::make('conclusion')
+                            ->label('Conclusion (English)')
                             ->rows(3)
                             ->nullable()
                             ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+                Forms\Components\Section::make('Dhivehi content')
+                    ->schema([
+                        TextInput::make('title_dv')
+                            ->label('Title (Dhivehi)')
+                            ->maxLength(255)
+                            ->columnSpanFull()
+                            ->extraAttributes(['dir' => 'rtl', 'class' => 'text-right']),
+                        TextInput::make('read_time_dv')
+                            ->label('Read time (Dhivehi)')
+                            ->maxLength(255)
+                            ->placeholder('e.g. 5 ދަޤީޤާ')
+                            ->extraAttributes(['dir' => 'rtl', 'class' => 'text-right']),
+                        Textarea::make('intro_dv')
+                            ->label('Intro (Dhivehi)')
+                            ->rows(3)
+                            ->nullable()
+                            ->columnSpanFull()
+                            ->extraAttributes(['dir' => 'rtl', 'class' => 'text-right']),
+                        Textarea::make('conclusion_dv')
+                            ->label('Conclusion (Dhivehi)')
+                            ->rows(3)
+                            ->nullable()
+                            ->columnSpanFull()
+                            ->extraAttributes(['dir' => 'rtl', 'class' => 'text-right']),
                     ])
                     ->columns(2),
                 Forms\Components\Section::make('Article content blocks')
@@ -119,23 +137,6 @@ class BlogPostResource extends Resource
                             ->defaultItems(0)
                             ->columnSpanFull(),
                     ]),
-                Forms\Components\Section::make('SEO')
-                    ->description('It is essential to enter data into these sections for this blog to be SEO friendly.')
-                    ->schema([
-                        TextInput::make('meta_title')
-                            ->label('Meta title')
-                            ->maxLength(70)
-                            ->placeholder('Defaults to post title + Al Zaha')
-                            ->helperText('Recommended: 50–60 characters.'),
-                        Textarea::make('meta_description')
-                            ->label('Meta description')
-                            ->rows(2)
-                            ->maxLength(160)
-                            ->placeholder('Defaults to intro or content excerpt')
-                            ->helperText('Recommended: 150–160 characters.'),
-                    ])
-                    ->columns(1)
-                    ->collapsed(),
             ]);
     }
 
@@ -173,7 +174,7 @@ class BlogPostResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return false;
+        return true;
     }
 
     public static function getEloquentQuery(): Builder
