@@ -113,6 +113,29 @@
                     class="rounded-2xl p-6 flex flex-col gap-4"
                     style="background-color:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12)"
                 >
+                    <style>
+                        .ga-social {
+                            width: 2rem;
+                            height: 2rem;
+                            border-radius: 0.5rem;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: rgba(255, 255, 255, 0.07);
+                            color: rgba(255, 255, 255, 0.45);
+                            transition: all 200ms ease;
+                        }
+
+                        .ga-social:hover {
+                            background-color: rgba(33, 181, 163, 0.2);
+                            color: #21b5a3;
+                        }
+
+                        .ga-social svg {
+                            width: 0.875rem;
+                            height: 0.875rem;
+                        }
+                    </style>
                     <p
                         class="text-xs uppercase tracking-widest"
                         style="color:rgba(255,255,255,0.45);font-family:{{ $fontBody }}"
@@ -121,9 +144,9 @@
                     </p>
                     @php
                         $socialLinks = [
-                            ['label' => 'F', 'url' => $contact?->facebook_url],
-                            ['label' => 'X', 'url' => $contact?->x_url],
-                            ['label' => 'IG', 'url' => $contact?->instagram_url],
+                            ['type' => 'facebook', 'url' => $contact?->facebook_url],
+                            ['type' => 'twitter', 'url' => $contact?->x_url],
+                            ['type' => 'instagram', 'url' => $contact?->instagram_url],
                         ];
                     @endphp
                     <div class="flex gap-3">
@@ -133,10 +156,27 @@
                                     href="{{ $social['url'] }}"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="w-10 h-10 rounded-xl flex items-center justify-center text-xs transition-all duration-200"
-                                    style="background-color:rgba(33,181,163,0.2);color:#21b5a3;font-family:{{ $fontBody }}"
+                                    class="ga-social"
+                                    aria-label="{{ ucfirst($social['type']) }}"
                                 >
-                                    {{ $social['label'] }}
+                                    @switch($social['type'])
+                                        @case('facebook')
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                            </svg>
+                                            @break
+                                        @case('instagram')
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                            </svg>
+                                            @break
+                                        @default
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2-5-1.5-5-8 0-9-1.1-1.1-1.8-2.6-2-4 2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                                            </svg>
+                                    @endswitch
                                 </a>
                             @endif
                         @endforeach
